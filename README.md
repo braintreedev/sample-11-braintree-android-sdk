@@ -44,6 +44,10 @@ The sample backend is written in Node.js and uses:
 * Run `npm start` to start the app
 * Use ngrok to create a tunnel for your localhost
 	* __IMPORTANT:__ Make sure to edit `SERVER_BASE` in the `SDKActivity` of the Android app
+	
+## Live demo
+
+A live demo can be found [here](http://11.commercefactory.org/). Please make sure to follow the instructions in order to download and install the Android apk file accordingly.
 
 ## Useful links
 
