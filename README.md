@@ -7,7 +7,7 @@ This demo uses
 
 * Android 4.3 and above
 * The [Asynchronous HTTP Library](http://github.com/loopj/android-async-http)
-* The [Braintree Client SDK for Android](http://github.com/braintree/client-sdk-docs/blob/master/Android-README.md)
+* The [Braintree Client SDK for Android](http://github.com/braintree/braintree_android) 1.0 or above
 * [Gradle](http://www.gradle.org) 0.12 or above
 * [Android Studio](https://developer.android.com/sdk/installing/studio.html) 0.8 or above
 
@@ -51,6 +51,4 @@ A live demo can be found [here](http://11.commercefactory.org/). Please make sur
 
 ## Useful links
 
-* [The Braintree Client SDK for Android](http://github.com/braintree/client-sdk-docs/blob/master/Android-README.md)
-* [The Braintree Node SDK](http://www.braintreepayments.com/docs/node/)
-* [The Braintree Sandbox with Node](http://www.braintreepayments.com/docs/node/reference/sandbox)
+* [The Braintree Client SDK for Android](https://developers.braintreepayments.com/android+node/sdk/overview/how-it-works) - full documentation of the SDK
