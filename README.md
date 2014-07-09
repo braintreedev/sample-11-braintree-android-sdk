@@ -1,6 +1,6 @@
 # Using the Braintree Client SDK for Android
 
-This is an example of the Braintree Client SDK for processing both PayPal and credit card payments in Android applications. It comes with a minimal backened example written in Node.js that shows how to generate client tokens and how to process the payment method nonce.
+This is an example of the Braintree v.zero Client SDK for processing both PayPal and credit card payments in Android applications. It comes with a minimal backened example written in Node.js that shows how to generate client tokens and how to process the payment method nonce.
 ## Technology
 
 This demo uses
