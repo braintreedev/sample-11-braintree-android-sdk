@@ -7,8 +7,8 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
 
-import com.braintree.api.dropin.BraintreePaymentActivity;
-import com.braintree.api.dropin.Customization;
+import com.braintreepayments.api.dropin.BraintreePaymentActivity;
+import com.braintreepayments.api.dropin.Customization;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -44,7 +44,7 @@ public class SDKActivity extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == BraintreePaymentActivity.BRAINTREE_RESULT_OK) {
+        if (resultCode == BraintreePaymentActivity.RESULT_OK) {
             String paymentMethodNonce = data.getStringExtra(BraintreePaymentActivity.EXTRA_PAYMENT_METHOD_NONCE);
 
             RequestParams requestParams = new RequestParams();
