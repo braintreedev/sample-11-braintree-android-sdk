@@ -8,8 +8,8 @@ This demo uses
 * Android 4.3 and above
 * The [Asynchronous HTTP Library](http://github.com/loopj/android-async-http)
 * The [Braintree Client SDK for Android](http://github.com/braintree/braintree_android) 1.0 or above
-* [Gradle](http://www.gradle.org) 0.12 or above
-* [Android Studio](https://developer.android.com/sdk/installing/studio.html) 0.8 or above
+* [Gradle Plugin](http://tools.android.com/tech-docs/new-build-system/migrating-to-1-0-0) 1.0.0 or above
+* [Android Studio](https://developer.android.com/sdk/installing/studio.html) 1.0 or above
 
 The sample backend is written in Node.js and uses:
 
