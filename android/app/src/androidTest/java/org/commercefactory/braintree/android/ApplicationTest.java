@@ -1,4 +1,4 @@
-package com.timmesserschmidt.braintreesdk;
+package org.commercefactory.braintree.android;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
