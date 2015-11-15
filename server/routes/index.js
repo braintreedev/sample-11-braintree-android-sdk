@@ -12,7 +12,7 @@ var gateway = braintree.connect({
 
 /* GET Creates a new token and returns it in the response */
 router.get('/token', function (req, res) {
-  gateway.clientToken.generate(null, function (error, response) {
+  gateway.clientToken.generate({}, function (error, response) {
     if (!error) {
       res.send(response.clientToken);
     } else {
@@ -23,12 +23,12 @@ router.get('/token', function (req, res) {
 
 /* POST Handles the amount & payment method nonce to execute a transaction */
 router.post('/payment', function (req, res) {
-  var amount = req.param('amount');
-  var payment_method_nonce = req.param('payment_method_nonce');
+  var amount = req.body.amount;
+  var paymentMethodNonce = req.body.payment_method_nonce;
 
   var sale = {
     amount: amount,
-    payment_method_nonce: payment_method_nonce
+    paymentMethodNonce: paymentMethodNonce
   };
 
   gateway.transaction.sale(sale, function (error, response) {
