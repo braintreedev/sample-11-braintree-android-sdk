@@ -18,8 +18,7 @@ import com.loopj.android.http.TextHttpResponseHandler;
 import cz.msebera.android.httpclient.Header;
 
 public class SDKActivity extends Activity {
-    private static final String SERVER_BASE = "http://dev.tme.coffee";
-    // "http://tim.ngrok.com";
+    private static final String SERVER_BASE = "YOUR-SERVER.COM"; // Replace with your own server
     private static final int REQUEST_CODE = Menu.FIRST;
     private AsyncHttpClient client = new AsyncHttpClient();
     private String clientToken;
