@@ -7,14 +7,19 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
 
-import com.braintreepayments.api.dropin.BraintreePaymentActivity;
-import com.braintreepayments.api.dropin.Customization;
+
+import com.braintreepayments.api.BraintreePaymentActivity;
+import com.braintreepayments.api.PaymentRequest;
+import com.braintreepayments.api.models.PaymentMethodNonce;
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
+
+import cz.msebera.android.httpclient.Header;
 
 public class SDKActivity extends Activity {
-    private static final String SERVER_BASE = "http://tim.ngrok.com";
+    private static final String SERVER_BASE = "http://dev.tme.coffee";
+    // "http://tim.ngrok.com";
     private static final int REQUEST_CODE = Menu.FIRST;
     private AsyncHttpClient client = new AsyncHttpClient();
     private String clientToken;
@@ -28,43 +33,49 @@ public class SDKActivity extends Activity {
     }
 
     public void onStartClick(View view) {
-        Customization customization = new Customization.CustomizationBuilder()
+        PaymentRequest paymentRequest = new PaymentRequest()
+                .clientToken(clientToken)
+                .amount("$10.00")
                 .primaryDescription("Awesome payment")
                 .secondaryDescription("Using the Client SDK")
-                .amount("$10.00")
-                .submitButtonText("Pay")
-                .build();
+                .submitButtonText("Pay");
 
-        Intent intent = new Intent(this, BraintreePaymentActivity.class);
-        intent.putExtra(BraintreePaymentActivity.EXTRA_CUSTOMIZATION, customization);
-        intent.putExtra(BraintreePaymentActivity.EXTRA_CLIENT_TOKEN, clientToken);
-
-        startActivityForResult(intent, REQUEST_CODE);
+        startActivityForResult(paymentRequest.getIntent(this), REQUEST_CODE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == BraintreePaymentActivity.RESULT_OK) {
-            String paymentMethodNonce = data.getStringExtra(BraintreePaymentActivity.EXTRA_PAYMENT_METHOD_NONCE);
+            PaymentMethodNonce paymentMethodNonce = data.getParcelableExtra(BraintreePaymentActivity.EXTRA_PAYMENT_METHOD_NONCE);
 
             RequestParams requestParams = new RequestParams();
-            requestParams.put("payment_method_nonce", paymentMethodNonce);
+            requestParams.put("payment_method_nonce", paymentMethodNonce.getNonce());
             requestParams.put("amount", "10.00");
 
-            client.post(SERVER_BASE + "/payment", requestParams, new AsyncHttpResponseHandler() {
+            client.post(SERVER_BASE + "/payment", requestParams, new TextHttpResponseHandler() {
                 @Override
-                public void onSuccess(String content) {
-                    Toast.makeText(SDKActivity.this, content, Toast.LENGTH_LONG).show();
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    Toast.makeText(SDKActivity.this, responseString, Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                    Toast.makeText(SDKActivity.this, responseString, Toast.LENGTH_LONG).show();
                 }
             });
         }
     }
 
     private void getToken() {
-        client.get(SERVER_BASE + "/token", new AsyncHttpResponseHandler() {
+        client.get(SERVER_BASE + "/token", new TextHttpResponseHandler() {
             @Override
-            public void onSuccess(String content) {
-                clientToken = content;
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                findViewById(R.id.btn_start).setEnabled(false);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                clientToken = responseString;
                 findViewById(R.id.btn_start).setEnabled(true);
             }
         });
